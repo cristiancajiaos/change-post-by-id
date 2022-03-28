@@ -1,1 +1,7 @@
-<p>post works!</p>
+<div *ngIf="currentPost; else loading">
+  <h4>{{currentPost.title}}</h4>
+  <p>{{currentPost.body}}</p>
+</div>
+<ng-template #loading>
+  <i class="fa-solid fa-loading fa-4x"></i>
+</ng-template>

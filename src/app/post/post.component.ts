@@ -1,5 +1,7 @@
+import { Post } from './../shared/interfaces/post';
 import { PostService } from './post.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -8,14 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostComponent implements OnInit {
 
+  id: string = '';
+  currentPost: Post;
+
   constructor(
-    private post: PostService
+    private post: PostService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.post.getPosts().subscribe(posts => {
+    this.activatedRoute.params?.subscribe(params => {
+      this.getPost(params['id']);
+    });
+  }
+
+  getPosts(): void {
+    this.post.getPosts().subscribe((posts) => {
       console.log(posts);
     });
   }
 
+  getPost(id: string): void {
+    this.post.getPost(id).subscribe(post => {
+      this.currentPost = post;
+    });
+  }
 }
