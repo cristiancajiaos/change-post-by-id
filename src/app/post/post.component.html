@@ -1,6 +1,12 @@
 <div *ngIf="currentPost; else loading">
-  <h4>{{currentPost.title}}</h4>
-  <p>{{currentPost.body}}</p>
+  <div class="row">
+    <div class="col-12">
+      <h4>{{currentPost.title}}</h4>
+      <p>{{currentPost.body}}</p>
+    </div>
+    <hr/>
+    <app-comments [id]="id"></app-comments>
+  </div>
 </div>
 <ng-template #loading>
   <i class="fa-solid fa-loading fa-4x"></i>

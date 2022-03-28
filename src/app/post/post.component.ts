@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PostComponent implements OnInit {
 
-  id: string = '';
+  id: number = 0;
   currentPost: Post;
 
   constructor(
@@ -20,7 +20,9 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params?.subscribe(params => {
-      this.getPost(params['id']);
+      let id = params['id'];
+      this.id = parseInt(id, 10);
+      this.getPost(this.id.toString());
     });
   }
 
